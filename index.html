@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almacén de Stock</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="contenedorRegistroPersonas">
+      <form action="" id="formulario">
+        <input type="text" name="" id="nombre" required placeholder="nombre" />
+        <input
+          type="text"
+          name=""
+          id="apellido"
+          required
+          placeholder="apellido"
+        />
+        <input type="email" name="" id="correo" required placeholder="correo" />
+        <input
+          type="number"
+          name=""
+          id="dni"
+          required
+          pattern="[0-9]{8}"
+          title="Debe poner 8 números y una letra"
+        />
+        <input
+          type="password"
+          name=""
+          id="clave"
+          required
+          placeholder="clave"
+        />
+
+        <input type="submit" value="Enviar" id="botonSubmit" />
+      </form>
+    </div>
+
+    <div class="contenedorIngresoDePersonas">
+      <form action="" id="formularioIngresoPersonas">
+        <input type="email" name="" id="ingresarCorreoUsuario" required />
+        <input type="password" name="" id="ingresarClave"  required/>
+        <input type="submit" value="Ingresar" id="ingresarUsuarioBoton" />
+      </form>
+    </div>
+
+
+    <div class="contenedorAlmacen">
+
+
+      <button id="agregarProducto">AGREGAR PRODUCTO</button>
+
+      <div class="contenedorAgregarProducto">
+
+
+        <form action="" id="formularioAgregarProductos">
+
+          <input type="text" name="" id="inputProducto" placeholder="producto" required>
+          <input type="number" name="" id="inputPrecio" placeholder="precio" required>
+          <input type="number" name="" id="inputCantidad" placeholder="cantidad" required>
+
+          <input type="submit" value="Agregar Producto">
+
+        </form>
+
+
+
+      </div>
+
+
+      <button id="botonVerProductos">VER PRODUCTOS</button>
+
+      <div class="contenedorVerProductos">
+        
+      </div>
+
+
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

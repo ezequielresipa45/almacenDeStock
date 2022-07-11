@@ -1,0 +1,27 @@
+.contenedorAlmacen{
+    width: 500px;
+    height: 500px;
+    background-color: red;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#formularioAgregarProductos{
+    display: none;
+    background-color: violet;
+position: absolute;
+padding: 25px;
+left: 25%;
+right: 30%;
+top: 20%;
+}
+
+
+.contenedorVerProductos{
+    display: none;
+    width: 500px;
+    height: 500px;
+    background-color: pink;
+}
