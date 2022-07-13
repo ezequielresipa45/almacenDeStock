@@ -8,78 +8,306 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="contenedorRegistroPersonas">
-      <form action="" id="formulario">
-        <input type="text" name="" id="nombre" required placeholder="nombre" />
+
+
+
+<div class="contenedorPantallaPrincipal">
+
+
+<div class="cajaRegistro">
+   <h1>
+    As App
+    <img src="it-developer-outline.gif" alt="" />
+
+
+
+    <lord-icon
+      src="https://cdn.lordicon.com/vfzqittk.json"
+      trigger="hover"
+      id="icon-closed"
+      title="Cerrar"
+      colors="primary:#fff"
+      state="hover-1"
+      style="width: 20px; height: 20px"
+    >
+    </lord-icon>
+  </h1> 
+  <h2>Almacén de Stock <span>...</span></h2>
+
+  <div class="contenedorIngresoDePersonas">
+    <form action="" id="formularioIngresoPersonas">
+      <div class="group">
+        <input
+          type="email"
+          name=""
+          id="ingresarCorreoUsuario"
+          required
+          class="input"
+          autocomplete="off"
+        />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Correo</label>
+      </div>
+
+      <div class="group">
+        <input
+          type="password"
+          name=""
+          id="ingresarClave"
+          required
+          class="input"
+          autocomplete="off"
+        />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Clave</label>
+      </div>
+
+      <button
+        type="submit"
+        value="Ingresar"
+        class="UsuarioBoton"
+        id="ingresarUsuarioBoton"
+      >
+        Ingresar
+      </button>
+
+      <a href="#" id="enlaceRegistroPersonas">Aún no soy usuario de As APP</a>
+    </form>
+  </div>
+  <div class="contenedorRegistroPersonas">
+
+
+    
+    <form action="" id="formulario">
+      <div class="group">
+        <input
+          type="text"
+          name=""
+          id="nombre"
+          required
+          class="input"
+          autocomplete="offs"
+        />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Nombre</label>
+      </div>
+
+      <div class="group">
         <input
           type="text"
           name=""
           id="apellido"
           required
-          placeholder="apellido"
+          class="input"
+          autocomplete="offs"
         />
-        <input type="email" name="" id="correo" required placeholder="correo" />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Apellido</label>
+      </div>
+
+      <div class="group">
+        <input
+          type="email"
+          name=""
+          id="correo"
+          required
+          class="input"
+          autocomplete="offs"
+        />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Correo</label>
+      </div>
+
+      <div class="group">
         <input
           type="number"
           name=""
           id="dni"
           required
+          class="input"
           pattern="[0-9]{8}"
-          title="Debe poner 8 números y una letra"
+          title="Debe poner 8 números"
+          autocomplete="offs"
         />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Dni</label>
+      </div>
+
+      <div class="group">
         <input
           type="password"
           name=""
           id="clave"
           required
-          placeholder="clave"
+          class="input"
+          autocomplete="offs"
         />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Clave</label>
+      </div>
 
-        <input type="submit" value="Enviar" id="botonSubmit" />
-      </form>
-    </div>
+      <button
+        type="submit"
+        value="Enviar"
+        class="UsuarioBoton"
+        id="botonSubmit"
+      >
+        Registrarse
+      </button>
+    </form>
+  </div>
 
-    <div class="contenedorIngresoDePersonas">
-      <form action="" id="formularioIngresoPersonas">
-        <input type="email" name="" id="ingresarCorreoUsuario" required />
-        <input type="password" name="" id="ingresarClave"  required/>
-        <input type="submit" value="Ingresar" id="ingresarUsuarioBoton" />
-      </form>
-    </div>
+
+
+</div>
+
+
+<div class="contenidoImagenesDetalles">
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="contenedorPrincipalAlmacen">
+
+<div class="contenedorImagenAlmacen"></div>
+
 
 
     <div class="contenedorAlmacen">
 
-
-      <button id="agregarProducto">AGREGAR PRODUCTO</button>
-
-      <div class="contenedorAgregarProducto">
-
-
-        <form action="" id="formularioAgregarProductos">
-
-          <input type="text" name="" id="inputProducto" placeholder="producto" required>
-          <input type="number" name="" id="inputPrecio" placeholder="precio" required>
-          <input type="number" name="" id="inputCantidad" placeholder="cantidad" required>
-
-          <input type="submit" value="Agregar Producto">
-
-        </form>
+      <div class="administradorContenedor">
 
 
 
-      </div>
+   
+
+      <h2>Mi Almacén | As App
+        <img src="it-developer-outline.gif" alt="" /></h2>
+
+      <p id="administrador"></p>
+    </div>
 
 
-      <button id="botonVerProductos">VER PRODUCTOS</button>
 
-      <div class="contenedorVerProductos">
-        
-      </div>
 
+      <div class="contenedorBotones">
+
+
+
+      <button id="agregarProducto">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> AGREGAR PRODUCTO
+        </span>
+      </button>
+
+      <button id="botonVerProductos" >
+        <span>
+           VER PRODUCTOS
+        </span>
+      </button>
 
     </div>
 
+
+
+      <div class="contenedorAgregarProducto">
+        <div class="contenedorModalAgregarProducto">
+          <div class="modal modal-close">
+            <lord-icon
+              src="https://cdn.lordicon.com/vfzqittk.json"
+              trigger="hover"
+              id="cerrarModal"
+              title="Cerrar"
+              colors="primary:#000"
+              state="hover-1"
+              style="width: 20px; height: 20px"
+            >
+            </lord-icon>
+
+            <div class="contenidoModal">
+              <form action="" id="formularioAgregarProductos">
+                <input
+                  type="text"
+                  name=""
+                  id="inputProducto"
+                  placeholder="producto"
+                  required
+                />
+                <input
+                  type="number"
+                  name=""
+                  id="inputPrecio"
+                  placeholder="precio"
+                  required
+                />
+                <input
+                  type="number"
+                  name=""
+                  id="inputCantidad"
+                  placeholder="cantidad"
+                  required
+                />
+
+                <input type="submit" value="Agregar Producto" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+
+      <div class="contenedorVerProductos">
+
+        <div class="cajaDetalles">
+          <p>PRODUCTOS</p>
+          <p>PRECIO</p>
+        </div>
+
+
+      </div>
+
+
+
+      <button class="salirAlmacenAdmin">
+        <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024"><path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path></svg>
+        <span><a href="index.html">Salir</a></span>
+      </button>
+
+
+
+
+      
+
+    </div>
+
+
+
+
+  </div>
+
+
+    <div class="loader"></div>
+    <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

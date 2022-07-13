@@ -14,9 +14,13 @@
 */  
 
 
+
+
+
 /* VARIABLES DE CONTENEDOR ALMACEN */
 
-let contenedorAlmacen = document.getElementsByClassName('contenedorAlmacen')[0];
+// let contenedorAlmacen = document.getElementsByClassName('contenedorAlmacen')[0];
+let contenedorPrincipalAlmacen = document.getElementsByClassName('contenedorPrincipalAlmacen')[0];
 
 let contenedorRegistroPersonas = document.getElementsByClassName('contenedorRegistroPersonas')[0];
 let contenedorIngresoDePersonas = document.getElementsByClassName('contenedorIngresoDePersonas')[0];
@@ -74,7 +78,10 @@ let ingresarUsuarioBoton = document.getElementById("ingresarUsuarioBoton");
 let ingresarCorreoUsuario = document.getElementById("ingresarCorreoUsuario");
 let ingresarClave = document.getElementById("ingresarClave");
 let formularioIngresoPersonas = document.getElementById('formularioIngresoPersonas');
-
+let loader = document.getElementsByClassName('loader')[0];
+let contenidoImagenesDetalles = document.getElementsByClassName('contenidoImagenesDetalles')[0];
+let contenedorPantallaPrincipal = document.getElementsByClassName('contenedorPantallaPrincipal')[0];
+let administrador = document.getElementById('administrador');
 
 /* CONSUMIMOS LA BASE DE DATOS DEL LOCAL STORAGE A TRAVEZ DE UNA PROMESA CON FETCH ) */
 
@@ -111,17 +118,34 @@ let alerta = true;
           nueva[personas].clave === ingresarClave.value
         ) {
           // console.log(nueva[personas].nombre); /* ME IMPRIME EL NOMBRE SOLO DE LA PERSONA QUE INICIO SESION */
-          alert("SPINNER CARGANDO.....");
-          alert("Usuario registrado correctamente")
-          contenedorRegistroPersonas.style.display = 'none';
-          contenedorIngresoDePersonas.style.display = 'none';
-          contenedorAlmacen.style.display = 'flex';
+          contenedorPantallaPrincipal.style.display = 'none';
+          contenidoImagenesDetalles.style.display = 'none';
+          // contenedorRegistroPersonas.style.display = 'none';
+          // contenedorIngresoDePersonas.style.display = 'none';
+          h1.style.display = 'none';
+          h2.style.display = 'none';
+          loader.style.display = 'block';
           alerta = false;
+          administrador.innerHTML = `Administrador: ${nueva[personas].nombre} ${nueva[personas].apellido}`;
+
+          setTimeout(()=>{
+          
+          
+
+          contenedorPrincipalAlmacen.style.display = 'flex';
+          loader.style.display = 'none';
+
+        },3000)
         }
       }
 
       if (alerta) {
-        alert("USUARIO NO ENCONTRADO")
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algunos datos ingresados no son validos...',
+          // footer: '<a href="">Why do I have this issue?</a>'
+        })
       }
      
     });
@@ -143,14 +167,64 @@ let inputCantidad = document.getElementById('inputCantidad');
 let botonVerProductos = document.getElementById('botonVerProductos');
 let contenedorVerProductos = document.getElementsByClassName('contenedorVerProductos')[0];
 
+
+
+
+
+
+
+
+
+/****** MODAL PARA CREAR PRODUCTOS */
+
+let cerrarModal = document.getElementById('cerrarModal');
+
+let modal = document.getElementsByClassName('modal')[0];
+let modalContainer = document.getElementsByClassName('contenedorModalAgregarProducto')[0];
+
+
 /* AGREGAR PRODUCTO A LA ALMACENN */
 
-botonAgregarProducto.addEventListener('click',()=>{
+botonAgregarProducto.addEventListener('click',(e)=>{
 
-  contenedorRegistroPersonas.style.display = 'none';
-  contenedorIngresoDePersonas.style.display = 'none';
-  formularioAgregarProductos.style.display = 'block'
-})
+e.preventDefault();
+contenedorRegistroPersonas.style.display = 'none';
+contenedorIngresoDePersonas.style.display = 'none';
+
+modalContainer.style.opacity = '1';
+modalContainer.style.visibility = 'visible';
+
+modal.classList.toggle('modal-close');
+
+});
+
+cerrarModal.addEventListener('click',(e)=>{
+
+  e.preventDefault();
+  modal.classList.toggle('modal-close');
+
+setTimeout(()=>{  modalContainer.style.opacity = '0';
+modalContainer.style.visibility = 'hidden';},400)
+ 
+  
+  });
+
+  window.addEventListener('click',(e)=>{
+
+
+
+if(e.target == modalContainer ){
+
+  modal.classList.toggle('modal-close');
+
+  setTimeout(()=>{  modalContainer.style.opacity = '0';
+  modalContainer.style.visibility = 'hidden';},400)
+
+}
+
+
+
+  })
 
 
 
@@ -172,6 +246,7 @@ let arregloProductos = JSON.parse(localStorage.getItem("listaProductos")) ?? [];
 
 
 
+
 formularioAgregarProductos.addEventListener('submit', (e)=>{
   e.preventDefault();
 
@@ -179,7 +254,7 @@ formularioAgregarProductos.addEventListener('submit', (e)=>{
 let productoAgregado = new Productos(inputProducto.value,inputPrecio.value,inputCantidad.value);
 
 
-arregloProductos.push(productoAgregado);
+  arregloProductos.push(productoAgregado);
 
 
 /* ALMACENAR ARREGLO DE PRODUCTOS  EN EL LOCAL STORAGE PARA SIMULAR UNA BASE DE DATOS*/
@@ -190,22 +265,41 @@ const guardarLocal = (clave, valor) => {
 
 for (const arregloProducto of arregloProductos) {
   guardarLocal("listaProductos", JSON.stringify(arregloProductos));
+
 }
 
 alert('Producto Cargado')
 
+
+
 });
 
 
-/* CONSUMIMOS LA BASE DE DATOS DEL LOCAL STORAGE A TRAVEZ DE UNA PROMESA CON FETCH ) */
+
+
+
+
+
+
+
+
+
+
+// /* CONSUMIMOS LA BASE DE DATOS DEL LOCAL STORAGE A TRAVEZ DE UNA PROMESA CON FETCH ) */
 
 let arrayProductosJSON = JSON.stringify(arregloProductos);
 
+console.log(arrayProductosJSON);
 
-
-/* ADENTRO DE UN FORMULARIO */
+/* VER PRODUCTOS ADENTRO DE UN FORMULARIO */
 
 botonVerProductos.addEventListener('click',()=>{
+  console.log(arrayProductosJSON);
+
+
+
+  botonVerProductos.disabled = true; 
+
 
 
 let JSON_POST = "https://jsonplaceholder.typicode.com/posts";
@@ -233,8 +327,16 @@ fetch(JSON_POST, {
 
        console.log(nueva[productos].producto);
        console.log(nueva[productos].precio);
-      contenedorVerProductos.innerHTML = `<h2> ${nueva[productos].producto} </h2>
-                                            <p> ${nueva[productos].precio} </p>`
+
+
+       let parrafo = document.createElement("p");
+       parrafo.innerHTML = `
+       
+            <p> ${nueva[productos].producto.toUpperCase()} </p>
+            <p> ${nueva[productos].precio} </p>`;
+     
+            contenedorVerProductos.appendChild(parrafo);
+
     }
 
 
@@ -243,3 +345,43 @@ fetch(JSON_POST, {
 
 
 })
+
+
+
+
+
+/***** DOM  */
+
+let enlaceRegistroPersonas = document.getElementById('enlaceRegistroPersonas');
+let h2 = document.getElementsByTagName('h2')[0];
+let h1 = document.getElementsByTagName('h1')[0];
+let iconClosed = document.getElementById('icon-closed');
+    iconClosed.style.opacity = "0";
+    iconClosed.style.visibility = "hidden";
+
+
+
+
+    iconClosed.addEventListener('click',()=>{
+
+    contenedorIngresoDePersonas.style.display = "flex";
+    contenedorRegistroPersonas.style.display = "none";
+    iconClosed.style.opacity = "0";
+    iconClosed.style.visibility = "hidden";
+    h2.innerHTML = "Almacén de Stock <span>...</span>"
+    contenidoImagenesDetalles.style.backgroundImage = "url('../imagen-inicio.jpg')";
+
+
+    })
+
+enlaceRegistroPersonas.addEventListener('click', ()=>{
+  contenedorIngresoDePersonas.style.display = "none";
+  contenedorRegistroPersonas.style.display = "flex";
+  contenidoImagenesDetalles.style.backgroundImage = "url('../imagen-registro.jpg')";
+  h2.innerHTML = "Registro de Usuarios"
+  iconClosed.style.opacity = "1";
+  iconClosed.style.visibility = "visible";
+})
+
+
+
