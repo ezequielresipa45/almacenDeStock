@@ -1,32 +1,11 @@
-/* FUNCIONES  ✔
-   METODOS
-   CLASES  ✔
-   OBJETOS  ✔
-   ARREGLOS  ✔
-   BUCLES ✔
-   CONDICIONALES ✔
-   LOCAL STORAGE ✔
-   DOM  ✔
-   EVENTOS ✔
-   LIBRERIAS ✔
-   PROMESAS Y FETCH ✔
-
-*/  
-
-
-
-
-
-/* VARIABLES DE CONTENEDOR ALMACEN */
-
-// let contenedorAlmacen = document.getElementsByClassName('contenedorAlmacen')[0];
-let contenedorPrincipalAlmacen = document.getElementsByClassName('contenedorPrincipalAlmacen')[0];
-
-let contenedorRegistroPersonas = document.getElementsByClassName('contenedorRegistroPersonas')[0];
-let contenedorIngresoDePersonas = document.getElementsByClassName('contenedorIngresoDePersonas')[0];
-
 /* VARIABLES FORMULARIO DE REGISTRO DE USUARIOS */
 
+let contenedorRegistroPersonas = document.getElementsByClassName(
+  "contenedorRegistroPersonas"
+)[0];
+let contenedorIngresoDePersonas = document.getElementsByClassName(
+  "contenedorIngresoDePersonas"
+)[0];
 let nombre = document.getElementById("nombre");
 let apellido = document.getElementById("apellido");
 let correo = document.getElementById("correo");
@@ -34,7 +13,58 @@ let dni = document.getElementById("dni");
 let clave = document.getElementById("clave");
 let formulario = document.getElementById("formulario");
 
-/* CREAR USUARIO // INGRESAR USUARIO */
+/* VARIABLES PARA EVENTO DE CERRAR Y ABRIR FORMULARIO */
+
+let enlaceRegistroPersonas = document.getElementById("enlaceRegistroPersonas");
+let h2 = document.getElementsByTagName("h2")[0];
+let h1 = document.getElementsByTagName("h1")[0];
+let iconClosed = document.getElementById("icon-closed");
+
+/* VARIABLES PARA INGRESAR USUARIO */
+
+let ingresarCorreoUsuario = document.getElementById("ingresarCorreoUsuario");
+let ingresarClave = document.getElementById("ingresarClave");
+let formularioIngresoPersonas = document.getElementById(
+  "formularioIngresoPersonas"
+);
+let loader = document.getElementsByClassName("loader")[0];
+let contenidoImagenesDetalles = document.getElementsByClassName(
+  "contenidoImagenesDetalles"
+)[0];
+let contenedorPantallaPrincipal = document.getElementsByClassName(
+  "contenedorPantallaPrincipal"
+)[0];
+
+/***** EVENTO BOTON CERRAR  FORMULARIO DE REGISTRO Y EVENTO PARA ABRIR FORMULARIO DE REGISTRO  */
+
+iconClosed.style.opacity = "0";
+iconClosed.style.visibility = "hidden";
+
+// Agregamos el evento click al boton para simular cerrar la ventana de registro de usuarios //
+iconClosed.addEventListener("click", () => {
+  contenedorIngresoDePersonas.style.display = "flex";
+  contenedorRegistroPersonas.style.display = "none";
+  iconClosed.style.opacity = "0";
+  iconClosed.style.visibility = "hidden";
+  h2.innerHTML = "Almacén de Stock <span>...</span>";
+  contenidoImagenesDetalles.style.backgroundImage =
+    "url('../images/imagen-inicio.jpg')";
+});
+
+// Agregamos el evento click para simular el ingreso a la seccion de registro de personas a travez del enlace //
+enlaceRegistroPersonas.addEventListener("click", () => {
+  contenedorIngresoDePersonas.style.display = "none";
+  contenedorRegistroPersonas.style.display = "flex";
+  contenidoImagenesDetalles.style.backgroundImage =
+    "url('../images/imagen-registro.jpg')";
+  h2.innerHTML = "Registro de Usuarios";
+  iconClosed.style.opacity = "1";
+  iconClosed.style.visibility = "visible";
+});
+
+/******************************************************************************************************** */
+
+/* CREAR OBJETO USUARIO // INGRESAR USUARIO */
 
 class Usuarios {
   constructor(nombre, apellido, correo, dni, clave) {
@@ -46,10 +76,17 @@ class Usuarios {
   }
 }
 
+/* VARIABLE DONDE TENDREMOS EL ARREGLO DE TODOS LOS USUARIOS REGISTRADOS */
+
 let coleccionUsuarios = JSON.parse(localStorage.getItem("listaUsuarios")) ?? [];
 
-formulario.addEventListener("submit", () => {
-  
+/* EVENTO PARA EL FORMULARIO, AL DARLE SUBMIT PUSHEA AL ARREGLO LOS VALORES DEL USUARIO QUE REGISTRO EN EL FORM,
+    LUEGO ALMACENA ESE ARREGLO DE USUARIOS EN EL LOCAL STORAGE Y ENVIA UNA ALERTA AL USUARIO SI SE CARGO CORRECTAMENTE EL USUARIO,
+    HAY UN SETTIMEOUT QUE ME ACTUALIZA LA PAGINA LUEGO DE 1500 SEGUNDOS PARA VOLVER AL INICIO DE LA PAGINA.
+*/
+
+formulario.addEventListener("submit", (e) => {
+  e.preventDefault();
   let personas = new Usuarios(
     nombre.value,
     apellido.value,
@@ -69,28 +106,26 @@ formulario.addEventListener("submit", () => {
     guardarLocal("listaUsuarios", JSON.stringify(coleccionUsuarios));
   }
 
-  alert('Usuario Registrado')
+  Swal.fire({
+    icon: "success",
+    title: "Usuario registrado exitosamente...",
+  });
+
+  setTimeout(() => {
+    location.reload();
+  }, 1500);
 });
 
-/* VARIABLES PARA INGRESAR USUARIO */
+/******************************************************************************************************** */
 
-let ingresarUsuarioBoton = document.getElementById("ingresarUsuarioBoton");
-let ingresarCorreoUsuario = document.getElementById("ingresarCorreoUsuario");
-let ingresarClave = document.getElementById("ingresarClave");
-let formularioIngresoPersonas = document.getElementById('formularioIngresoPersonas');
-let loader = document.getElementsByClassName('loader')[0];
-let contenidoImagenesDetalles = document.getElementsByClassName('contenidoImagenesDetalles')[0];
-let contenedorPantallaPrincipal = document.getElementsByClassName('contenedorPantallaPrincipal')[0];
-let administrador = document.getElementById('administrador');
+/* INGRESO DE USUARIO */
 
-/* CONSUMIMOS LA BASE DE DATOS DEL LOCAL STORAGE A TRAVEZ DE UNA PROMESA CON FETCH ) */
+/* CONSUMIMOS LA BASE DE DATOS de PERSONAS (objeto) DEL LOCAL STORAGE A TRAVEZ DE UNA PROMESA CON FETCH DENTRO DEL EVENTO SUBMIT DEL FORMULARIO */
 
 let coleccionJSON = JSON.stringify(coleccionUsuarios);
 
 formularioIngresoPersonas.addEventListener("submit", (e) => {
   e.preventDefault();
-  
-  // console.log(coleccionJSON);
 
   let JSON_POST = "https://jsonplaceholder.typicode.com/users";
 
@@ -107,281 +142,50 @@ formularioIngresoPersonas.addEventListener("submit", (e) => {
     .then((nueva) => {
       delete nueva.id;
 
+      /*** AQUI ITERAMOS LAS PERSONAS DENTRO DEL OBJETO QUE NOS TRAE LA APPI Y CHEQUEAMOS A TRAVEZ DE UN CONDICIONAL SI EL OBJETO TRAIDO ES EXACTAMENTE IGUAL AL OBJETO INGRESADO POR EL USUARIO, DE SER ASÍ LOS CONTENEDORES DEL INDEX DEJARAN DE MOSTRARSE, CARGARA UN SPINNER E INGRESARA A LA ALMACEN DE STOCK DEL USUARIO REGISTRADO, DE LLENAR MAL UN DATO EN EL CAMPO DE LOGEO, UNA ALERTA SALTARÁ PARA AVISAR QUE ALGO SALIO MAL. */
 
-let alerta = true;
+      let alerta = true; /** VARIABLE QUE FUNCIONA COMO ALERTA SI EL USUARIO LLENO MAL UN DATO EN EL CAMPO DE LOGEO */
 
       for (const personas in nueva) {
-        console.log(nueva[personas].nombre + " ESTOY AFUERA");
-
         if (
           nueva[personas].correo === ingresarCorreoUsuario.value &&
           nueva[personas].clave === ingresarClave.value
         ) {
-          // console.log(nueva[personas].nombre); /* ME IMPRIME EL NOMBRE SOLO DE LA PERSONA QUE INICIO SESION */
-          contenedorPantallaPrincipal.style.display = 'none';
-          contenidoImagenesDetalles.style.display = 'none';
-          // contenedorRegistroPersonas.style.display = 'none';
-          // contenedorIngresoDePersonas.style.display = 'none';
-          h1.style.display = 'none';
-          h2.style.display = 'none';
-          loader.style.display = 'block';
+          contenedorPantallaPrincipal.style.display = "none";
+          contenidoImagenesDetalles.style.display = "none";
+          contenedorRegistroPersonas.style.display = "none";
+          contenedorIngresoDePersonas.style.display = "none";
+          h1.style.display = "none";
+          h2.style.display = "none";
+          loader.style.display = "block";
           alerta = false;
-          administrador.innerHTML = `Administrador: ${nueva[personas].nombre} ${nueva[personas].apellido}`;
 
-          setTimeout(()=>{
-          
-          
+          localStorage.setItem("usuarioLogeado", nueva[personas].nombre);
 
-          contenedorPrincipalAlmacen.style.display = 'flex';
-          loader.style.display = 'none';
+          setTimeout(() => {
+            window.location.href = "../almacenUsuario.html";
 
-        },3000)
+            loader.style.display = "none";
+          }, 3000);
         }
       }
 
       if (alerta) {
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Algunos datos ingresados no son validos...',
-          // footer: '<a href="">Why do I have this issue?</a>'
-        })
+          icon: "error",
+          title: "Oops...",
+          text: "Algunos datos ingresados no son validos...",
+        });
       }
-     
-    });
-});
-
-
-
-
-
-/* VARIABLES PRODUCTOS */
-
-let contenedorAgregarProducto = document.getElementsByClassName('contenedorAgregarProducto')[0];
-let botonAgregarProducto = document.getElementById('agregarProducto');
-let formularioAgregarProductos = document.getElementById('formularioAgregarProductos');
-
-let inputProducto = document.getElementById('inputProducto');
-let inputPrecio = document.getElementById('inputPrecio');
-let inputCantidad = document.getElementById('inputCantidad');
-let botonVerProductos = document.getElementById('botonVerProductos');
-let contenedorVerProductos = document.getElementsByClassName('contenedorVerProductos')[0];
-
-
-
-
-
-
-
-
-
-/****** MODAL PARA CREAR PRODUCTOS */
-
-let cerrarModal = document.getElementById('cerrarModal');
-
-let modal = document.getElementsByClassName('modal')[0];
-let modalContainer = document.getElementsByClassName('contenedorModalAgregarProducto')[0];
-
-
-/* AGREGAR PRODUCTO A LA ALMACENN */
-
-botonAgregarProducto.addEventListener('click',(e)=>{
-
-e.preventDefault();
-contenedorRegistroPersonas.style.display = 'none';
-contenedorIngresoDePersonas.style.display = 'none';
-
-modalContainer.style.opacity = '1';
-modalContainer.style.visibility = 'visible';
-
-modal.classList.toggle('modal-close');
-
-});
-
-cerrarModal.addEventListener('click',(e)=>{
-
-  e.preventDefault();
-  modal.classList.toggle('modal-close');
-
-setTimeout(()=>{  modalContainer.style.opacity = '0';
-modalContainer.style.visibility = 'hidden';},400)
- 
-  
-  });
-
-  window.addEventListener('click',(e)=>{
-
-
-
-if(e.target == modalContainer ){
-
-  modal.classList.toggle('modal-close');
-
-  setTimeout(()=>{  modalContainer.style.opacity = '0';
-  modalContainer.style.visibility = 'hidden';},400)
-
-}
-
-
-
-  })
-
-
-
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-class Productos {
-  constructor(producto, precio,cantidad) {
-    this.producto = producto;
-    this.precio = precio;
-    this.cantidad = cantidad;
-    this.identificador = random(1, 100);
-  }
-}
-
-
-let arregloProductos = JSON.parse(localStorage.getItem("listaProductos")) ?? [];
-
-
-
-
-formularioAgregarProductos.addEventListener('submit', (e)=>{
-  e.preventDefault();
-
-
-let productoAgregado = new Productos(inputProducto.value,inputPrecio.value,inputCantidad.value);
-
-
-  arregloProductos.push(productoAgregado);
-
-
-/* ALMACENAR ARREGLO DE PRODUCTOS  EN EL LOCAL STORAGE PARA SIMULAR UNA BASE DE DATOS*/
-
-const guardarLocal = (clave, valor) => {
-  localStorage.setItem(clave, valor);
-};
-
-for (const arregloProducto of arregloProductos) {
-  guardarLocal("listaProductos", JSON.stringify(arregloProductos));
-
-}
-
-alert('Producto Cargado')
-
-
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-// /* CONSUMIMOS LA BASE DE DATOS DEL LOCAL STORAGE A TRAVEZ DE UNA PROMESA CON FETCH ) */
-
-let arrayProductosJSON = JSON.stringify(arregloProductos);
-
-console.log(arrayProductosJSON);
-
-/* VER PRODUCTOS ADENTRO DE UN FORMULARIO */
-
-botonVerProductos.addEventListener('click',()=>{
-  console.log(arrayProductosJSON);
-
-
-
-  botonVerProductos.disabled = true; 
-
-
-
-let JSON_POST = "https://jsonplaceholder.typicode.com/posts";
-
-fetch(JSON_POST, {
-  method: "POST",
-  body: arrayProductosJSON,
-  headers: {
-    "Content-type": "application/json; charset=UTF-8",
-  },
-})
-  .then((respuesta) => {
-    return respuesta.json();
-  })
-  .then((nueva) => {
-    delete nueva.id;
-    // console.log(nueva);
-
-    contenedorRegistroPersonas.style.display = 'none';
-    contenedorIngresoDePersonas.style.display = 'none';
-
-    contenedorVerProductos.style.display = 'flex';
-
-    for(const productos in nueva){
-
-       console.log(nueva[productos].producto);
-       console.log(nueva[productos].precio);
-
-
-       let parrafo = document.createElement("p");
-       parrafo.innerHTML = `
-       
-            <p> ${nueva[productos].producto.toUpperCase()} </p>
-            <p> ${nueva[productos].precio} </p>`;
-     
-            contenedorVerProductos.appendChild(parrafo);
-
-    }
-
-
-
-  });
-
-
-})
-
-
-
-
-
-/***** DOM  */
-
-let enlaceRegistroPersonas = document.getElementById('enlaceRegistroPersonas');
-let h2 = document.getElementsByTagName('h2')[0];
-let h1 = document.getElementsByTagName('h1')[0];
-let iconClosed = document.getElementById('icon-closed');
-    iconClosed.style.opacity = "0";
-    iconClosed.style.visibility = "hidden";
-
-
-
-
-    iconClosed.addEventListener('click',()=>{
-
-    contenedorIngresoDePersonas.style.display = "flex";
-    contenedorRegistroPersonas.style.display = "none";
-    iconClosed.style.opacity = "0";
-    iconClosed.style.visibility = "hidden";
-    h2.innerHTML = "Almacén de Stock <span>...</span>"
-    contenidoImagenesDetalles.style.backgroundImage = "url('../imagen-inicio.jpg')";
-
-
     })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error al cargar usuario, ponganse en contacto con el administrador",
+      });
+    })
+    .finally(() => {});
+});
 
-enlaceRegistroPersonas.addEventListener('click', ()=>{
-  contenedorIngresoDePersonas.style.display = "none";
-  contenedorRegistroPersonas.style.display = "flex";
-  contenidoImagenesDetalles.style.backgroundImage = "url('../imagen-registro.jpg')";
-  h2.innerHTML = "Registro de Usuarios"
-  iconClosed.style.opacity = "1";
-  iconClosed.style.visibility = "visible";
-})
-
-
-
+/******************************************************************************************************** */

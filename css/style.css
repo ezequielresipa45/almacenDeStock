@@ -14,52 +14,33 @@ body.swal2-height-auto {
   height: 100vh !important;
 }
 
-
-.contenedorPantallaPrincipal{
-
+.contenedorPantallaPrincipal {
   width: 100%;
   height: 100vh;
   background-color: #000;
   display: flex;
-
-  
 }
 
-.cajaRegistro{
-
+.cajaRegistro {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   width: 50%;
 }
 
-
-.cajaRegistro h2 span{
-color: #000;
+.cajaRegistro h2 span {
+  color: #000;
 }
 
-
-
-.contenidoImagenesDetalles{
+.contenidoImagenesDetalles {
   width: 50%;
   height: auto;
-  background-image: url(../imagen-inicio.jpg);
+  background-image: url(../images/imagen-inicio.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
-
-
-
-
-
-
-
-
-
 
 h1,
 h2 {
@@ -71,10 +52,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
- 
 }
-
-
 
 a {
   color: #5264ae;
@@ -101,16 +79,7 @@ a {
 .contenedorRegistroPersonas {
   display: none;
   padding: 30px;
-
 }
-
-
-
-
-
-
-
-
 
 .contenedorRegistroPersonas form {
   display: flex;
@@ -127,7 +96,6 @@ a {
 
 /******* INPUT ESTILOS INICIO USUARIO SESION */
 
-/* From uiverse.io by @G4b413l */
 .group {
   position: relative;
 }
@@ -146,7 +114,7 @@ a {
   outline: none;
 }
 
-label {
+.group label {
   color: #999;
   font-size: 18px;
   font-weight: normal;
@@ -225,7 +193,6 @@ label {
 
 /*** input submit */
 
-/* From uiverse.io by @meermubashar */
 .UsuarioBoton {
   width: 140px;
   height: 45px;
@@ -266,146 +233,180 @@ label {
   background: #b9b9b9;
 }
 
-
 /****** ESTILOS PARA CONTENEDORES DE ALMACEN **************/
 
-
-.contenedorPrincipalAlmacen{
-  display: none;
+.contenedorPrincipalAlmacen {
   width: 100%;
   height: 100vh;
+  display: flex;
 }
 
-.contenedorImagenAlmacen{
+.contenedorImagenAlmacen {
   width: 50%;
   height: auto;
-  background-image: url(../imagen-almacen.jpg);
+  background-image: url(../images/imagen-almacen.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-
 }
-
 
 .contenedorAlmacen {
   width: 50%;
   background-color: #000;
   color: #000;
   display: flex;
- 
   align-items: center;
   flex-direction: column;
   overflow: hidden;
-  
   gap: 5px;
-
-
-  
 }
 
-.administradorContenedor{
-  
+.administradorContenedor {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
- 
   padding: 20px;
 }
 
-.contenedorAlmacen h2{
+.contenedorAlmacen h2 {
   color: #fff;
-  
-
   margin: 10px 0 0 0;
   padding: 10px;
-  
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
-.contenedorAlmacen h2 img{
+.contenedorAlmacen h2 img {
   width: 30px;
   height: 30px;
-
 }
 
-
 .contenedorAlmacen p {
-
-text-align: center;
+  text-align: center;
   background-color: #19a74f;
   border-radius: 5px;
   margin: 10px 10px 0 0;
   padding: 10px;
   color: #fff;
   text-transform: uppercase;
-
 }
 
-.contenedorBotones{
-  
+.contenedorBotones {
   display: flex;
   margin: 50px;
   gap: 50px;
-}
-
-#formularioAgregarProductos {
-  
-  background-color: violet;
-  
-  padding: 25px;
-
 }
 
 .contenedorVerProductos {
   display: none;
   width: 100%;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   height: auto;
   background-color: #fff;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 0 0 30px 0;
-  
-  
+  position: relative;
 }
 
+.display {
+  display: flex;
+}
 
-.cajaDetalles{
+#cargandoVerProductos {
+  display: none;
+}
+
+/* SPINNER VER PRODUTOS */
+
+.load-row {
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.load-row span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #f76002;
+  border-radius: 50px;
+  animation: up-down6 0.5s ease-in infinite alternate;
+}
+
+.load-row span:nth-child(2) {
+  background: #e85b04c4;
+  animation-delay: 0.16s;
+}
+
+.load-row span:nth-child(3) {
+  background: #e85b0491;
+  animation-delay: 0.32s;
+}
+
+.load-row span:nth-child(4) {
+  background: #e85b0456;
+  animation-delay: 0.48s;
+}
+
+@keyframes up-down6 {
+  0% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+/****************************************************** FIN SPINNER VER PRODUCTOS ***************/
+
+.cajaDetalles {
   display: flex;
   background-color: rgb(92, 92, 92);
   width: 100%;
-  /* margin: 10px 0; */
-  justify-content: center;
-  align-items: center;
   position: sticky;
   top: 0;
-  
-  
+  box-sizing: border-box;
+  gap: 24px;
+  background-color: rgb(185, 46, 46);
 }
 
-.cajaDetalles p{
-  background-color: rgb(92, 92, 92) !important;
-
+.cajaDetalles .cajaDetallesP {
+  padding: 0;
+  margin: 10px 0;
+  border-radius: 0%;
+  text-align: start;
+  width: 20%;
+  background-color: rgb(185, 46, 46);
 }
 
-.contenedorVerProductos p{
-width: 97%;
+.contenedorVerProductos p {
+  width: 95%;
   background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 5px 0;
+  padding: 2px 30px 2px 0px;
+  text-align: left;
 }
+
+.contenedorVerProductos p h3 {
+  background-color: #cd1d08;
+  padding: 8px;
+  border-radius: 50%;
+  font-size: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
 /* ESTILOS SPINNER **************/
 
-/* From uiverse.io by @Cornerstone-04 */
 .loader {
   display: none;
   width: 150px;
@@ -413,7 +414,6 @@ width: 97%;
   border-left: 5px solid #38ff8e;
   border-radius: 50%;
   animation: right5231 0.9s linear infinite;
-
   margin: 30px 0;
 }
 
@@ -480,51 +480,132 @@ width: 97%;
 
 .contenedorModalAgregarProducto .modal {
   width: 400px;
-  height: 500px;
+  height: 265px;
   background-color: white;
   position: relative;
   transition: transform 0.7s;
   transform: translateY(0%);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .contenedorModalAgregarProducto .modal-close {
   transform: translateY(-200%);
 }
 
+#formularioAgregarProductos {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
 
+#formularioAgregarProductos legend {
+  padding: 15px 10px;
+  font-weight: 600;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid rgb(177, 176, 176);
+}
+
+#formularioAgregarProductos fieldset {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 15px;
+  padding: 20px 15px;
+  border: none;
+}
+
+#formularioAgregarProductos fieldset .contenedorLabelInputProducto,
+.contenedorLabelInputPrecio,
+.contenedorLabelInputCantidad {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#formularioAgregarProductos fieldset .contenedorLabelInputProducto label,
+.contenedorLabelInputPrecio label,
+.contenedorLabelInputCantidad label {
+  font-weight: bold;
+  width: 20%;
+  text-align: start;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#formularioAgregarProductos fieldset .contenedorLabelInputProducto input,
+.contenedorLabelInputPrecio input,
+.contenedorLabelInputCantidad input {
+  width: 75%;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid rgb(177, 176, 176);
+}
+
+input:focus {
+  outline: none;
+}
+
+.contenedorBotonesForm {
+  display: flex;
+  justify-content: end;
+  padding: 15px 10px;
+  gap: 5px;
+  border-top: 1px solid rgb(177, 176, 176);
+}
+
+.contenedorBotonesForm input {
+  padding: 5px;
+  background-color: #337ab7;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.contenedorBotonesForm button {
+  padding: 5px;
+  background-color: rgb(236, 75, 75);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
 
 /****** BOTON AGREGAR PRODUCTOS **********/
 
-/* From uiverse.io by @felipesntr */
-#agregarProducto, #botonVerProductos {
+#agregarProducto,
+#botonVerProductos {
   border: 2px solid #fff;
   background-color: #fff;
-  
   border-radius: 0.9em;
   padding: 0.8em 1.2em 0.8em 1em;
   transition: all ease-in-out 0.2s;
   font-size: 16px;
   cursor: pointer;
- }
- 
- #agregarProducto span, #botonVerProductos span {
+}
+
+#agregarProducto span,
+#botonVerProductos span {
   display: flex;
   justify-content: center;
   align-items: center;
   color: #000;
   font-weight: 600;
- }
- 
- #agregarProducto:hover, #botonVerProductos:hover {
+}
+
+#agregarProducto:hover,
+#botonVerProductos:hover {
   background-color: #acacac;
   border: 2px solid #acacac;
- }
+}
 
+/****************** BOTON SALIR ALMACEN ADMINISTRADOR **********************/
 
-
- /****************** BOTON SALIR ALMACEN ADMINISTRADOR **********************/
-
- /* From uiverse.io by @Jedi-hongbin */
 .salirAlmacenAdmin {
   display: flex;
   height: 3em;
@@ -541,29 +622,26 @@ width: 97%;
   position: absolute;
   top: 10px;
   left: 92%;
-  
+}
 
-
- }
- 
- .salirAlmacenAdmin > svg {
+.salirAlmacenAdmin > svg {
   margin-right: 5px;
   margin-left: 5px;
   font-size: 20px;
   transition: all 0.4s ease-in;
- }
- 
- .salirAlmacenAdmin:hover > svg {
+}
+
+.salirAlmacenAdmin:hover > svg {
   font-size: 1.2em;
   transform: translateX(-5px);
- }
- 
- .salirAlmacenAdmin:hover {
+}
+
+.salirAlmacenAdmin:hover {
   box-shadow: 3px 3px 12px #d1d1d1, -3px -3px 12px #ffffff;
   transform: translateY(-2px);
- }
+}
 
- .salirAlmacenAdmin span a{
+.salirAlmacenAdmin span a {
   text-decoration: none;
   color: #000;
- } 
+}

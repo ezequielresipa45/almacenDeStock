@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almacén Usuario</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="contenedorPrincipalAlmacen">
+      <div class="contenedorImagenAlmacen"></div>
+      <div class="contenedorAlmacen">
+        <div class="administradorContenedor">
+          <h2>
+            Mi Almacén | As App<img src="images/it-developer-outline.gif" alt="" />
+          </h2>
+          <p id="administrador"></p>
+        </div>
+        <div class="contenedorBotones">
+          <button id="agregarProducto">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+              >
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path
+                  fill="currentColor"
+                  d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"
+                ></path>
+              </svg>
+              AGREGAR PRODUCTO
+            </span>
+          </button>
+          <button id="botonVerProductos">
+            <span> VER PRODUCTOS </span>
+          </button>
+        </div>
+        <div class="contenedorAgregarProducto">
+          <div class="contenedorModalAgregarProducto">
+            <div class="modal modal-close">
+              <div class="contenidoModal">
+                <form action="" id="formularioAgregarProductos">
+                  <legend>Nuevo Producto</legend>
+                  <fieldset>
+                    <div class="contenedorLabelInputProducto">
+                      <label for="inputProducto">Producto: </label>
+                      <input
+                        type="text"
+                        name=""
+                        id="inputProducto"
+                        placeholder="ej. tornillo"
+                        required
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="contenedorLabelInputPrecio">
+                      <label for="inputPrecio">Precio: </label>
+                      <input
+                        type="number"
+                        name=""
+                        id="inputPrecio"
+                        placeholder="0"
+                        required
+                        autocomplete="off"
+                        min="1"
+                      />
+                    </div>
+                    <div class="contenedorLabelInputCantidad">
+                      <label for="inputCantidad">Cantidad: </label>
+                      <input
+                        type="number"
+                        name=""
+                        id="inputCantidad"
+                        placeholder="0"
+                        required
+                        autocomplete="off"
+                        min="1"
+                        max="100"
+                      />
+                    </div>
+                  </fieldset>
+                  <div class="contenedorBotonesForm">
+                    <input type="submit" value="Agregar" />
+                    <button id="cerrarModal">Cancelar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contenedorVerProductos">
+          <div class="cajaDetalles">
+            <p class="cajaDetallesP">PRODUCTOS</p>
+            <p class="cajaDetallesP">PRECIO</p>
+            <p class="cajaDetallesP">CANTIDAD</p>
+            <p class="cajaDetallesP">ID</p>
+          </div>
+          <div class="load-row" id="cargandoVerProductos">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <a href="index.html">
+          <button class="salirAlmacenAdmin">
+            <svg
+              height="16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewBox="0 0 1024 1024"
+            >
+              <path
+                d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"
+              ></path>
+            </svg>
+            <span>Salir</span>
+          </button>
+        </a>
+      </div>
+    </div>
+    <script type="module" src="js/scripAlmacen.js"></script>
+    <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>
